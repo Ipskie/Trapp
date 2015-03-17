@@ -1,0 +1,249 @@
+<?xml version="1.0"?>
+<map proto="1.3.6">
+<name>Trapp</name>
+<version>1.0.0</version>
+<objective>Capture and return the enemies wool to your victory monument!</objective>
+<authors>
+	<author>b8539c6d-533b-4be2-8f0d-3f70431eee87</author>  <!--  CaptainAndrew  -->
+</authors>
+<contributors>
+	<contributor contributation="XML, Packaging, Map Fixes and Improovements.">Qixit</contributor>
+</contributors>
+<teams>
+	<team id="purple" color="purple" max="15" max-overfill="18">Purple Team</team>
+	<team id="yellow" color="yellow" max="15" max-ovefill="18">Yellow Team</team>
+</teams>
+<spawns>
+    <spawn team="purple" kit="defender" yaw="90">
+        <block>-417,28,527</block>
+    <spawn team="blue" kit="blue" yaw="-90">
+        <block>-606,28,527</block>
+    </spawn>
+    <default yaw="-90">
+        <block>-512,45,527</block>
+    </default>
+</spawns>
+<kits>
+	<!--  Applied when the player is on their side of the map  -->
+	<kit name="defender" force="true">
+		<clear/>
+		<item slot="0">stone sword</item>
+		<item slot="1">bow</item>
+		<item slot="2">wood pickaxe</item>
+		<item slot="3">wood axe</item>
+		<item slot="5" amount="24" damage="5">wood</item>
+		<item slot="8" amount="3">golden apple</item>
+		<item slot="28" amount="32">arrow</item>
+		<potion duration="5" amplifier="3">heal</potion>
+	</kit>
+	<!--  Applied when the player is on the enemies side of the map  -->
+	<kit name="attacker" force="true">
+		<clear/>
+		<item slot="0">stone sword</item>
+		<item slot="1">bow</item>
+		<item slot="2">wood pickaxe</item>
+		<item slot="3">wood axe</item>
+		<item slot="5" amount="32" damage="5">wood</item>
+		<item slot="8" amount="6">golden apple</item>
+		<item slot="28" amount="32">arrow</item>
+		<boots attributes="generic.movementSpeed:add:1;generic.maxHealth:add:+3" locked="true">iron boots</boots>
+	</kit>
+	<!--  Applied when the player goes into the Wool Room region  -->
+	<kit name="retriever" force="true">
+		<clear/>
+		<item slot="0">iron sword</item>
+		<item slot="1">bow</item>
+		<item slot="2">wood pickaxe</item>
+		<item slot="3">wood axe</item>
+		<item slot="5" amount="64" damage="5">wood</item>
+		<item slot="8" amount="32">golden apple</item>
+		<item slot="28" amount="32">arrow</item>
+		<leggins>iron leggings</leggins>
+		<boots attributes="generic.movementSpeed:add:1;generic.maxHealth:add:+2" locked="true">diamond boots</boots>
+		<chestplate locked="true">chainmail chestplate<chestplate>
+		<potion duration="1" amplifier="5">heal</potion>
+		<potion duration="1" amplifier="oo">fast digging</potion>
+	</kit>
+	<!--  Armor and stained clay is distrubuted according to what team the player is on (see bellow)  -->
+	<kit name="yellow" parents="defender,retriever,attacker">
+		<helmet color="E5E533" damage="-3000" locked="true">leather helmet</helmet>
+		<chestplate color="E5E533" damage="-3000" locked="true">leather chestplate</chestplate>
+		<leggings color="E5E533" damage="-3000" locked="true">leather leggings</leggings>
+		<boots color="E5E533" damage="-3000" locked="true">leather boots</boots>
+		<item slot="4" amount="16" damage="4">stained clay</item>
+	</kit>
+	<kit name="purple" parents="defender,retriever,attacker">
+		<helmet color="7F3FB2" damage="-3000" locked="true">leather helmet</helmet>
+		<chestplate color="7F3FB2" damage="-3000" locked="true">leather chestplate</chestplate>
+		<leggings color="7F3FB2" damage="-3000" locked="true">leather leggings</leggings>
+		<boots color="7F3FB2" damage="-3000" locked="true">leather boots</boots>
+		<item slot="4" amount="16" damage="10">stained clay</item>
+	</kit>
+</kits>
+<killreward>
+	<item amount="8">arrow</item>
+	<item>golden apple</item>
+	<item amount="8" damage="5">wood</item>
+</killreward>
+<toolrepair>
+	<tool>stone sword</tool>
+	<tool>bow</tool>
+	<tool>wood pickaxe</tool>
+	<tool>wood axe</tool>
+</toolrepair>
+<itemremove>
+	<item>leather helmet</item>
+	<item>leather chestplate</item>
+	<item>leather leggings</item>
+	<item>leather boots</item>
+	<item>iron sword</item>
+	<item>bow</item>
+	<item>wood pickaxe</item>
+	<item>wood axe</item>
+	<item>chainmail chesplate</item>
+	<item>diamond boots</item>
+	<item>iron boots</item>
+	<item>arrow</item>
+	<item>stained clay</item>
+	<item>glowstone dust</item>
+	<item>ender stone</item>
+	<item>cobblestone</item>
+	<item>wood slab</item>
+</itemremove>
+<maxbuildheight>38</maxbuildheight>
+<filters>
+	<filter name="only-purple">
+		<team>purple</team>
+	</filter>
+	<filter name="only-yellow">
+		<team>yellow</team>
+	</filter>
+	<filter name="deny-yellow">
+		<deny>
+			<team>yellow</team>
+		</deny>
+	</filter>
+	<filter name="deny-purple">
+		<deny>
+			<team>purple</team>
+		</deny>
+	</filter>
+	<filter name="deny-void">
+		<deny>
+			<void/>
+		</deny>
+	</filter>
+	<filter name="only-wool">
+		<allow>
+			<block>wool</block>
+		</allow>
+	</filter>
+</filters>
+<regions>
+	<!--  Used for applying the deny-void filter  -->
+	<rectangle name="map" min="-oo,-oo" max="oo,oo"/>
+	<!--  Region kits  -->
+	<rectangle name="defend-purple" min="-505,506" max="-410,548"/>
+	<rectangle name="defend-yellow" min="-519,506" max="-613,548"/>
+	<rectangle name="attack-purple" min="-519,506" max="-613,548"/>
+	<rectangle name="attack-yellow" min="-505,506" max="-410,548"/>
+	<cuboid name="retrieve-yellow" min="-590,20,530" max="-588,24,524"/>
+	<cuboid name="retrieve-purple" min="-435,24,530" max="-433,20,524"/>
+	<!--  Applied  -->
+	<apply kit="defender" filter="only-purple" region="defend-purple"/>
+	<apply kit="defender" filter="only-yellow" region="defend-yellow"/>
+	<apply kit="attacker" filter="only-purple" region="attack-purple"/>
+	<apply kit="attacker" filter="only-yellow" region="attack-yellow"/>
+	<apply kit="retriever" region="retrieve-purple"/>
+	<apply kit="retriever" region="retrieve-yellow"/>
+	<!--  Other regions  -->
+	<cuboid name="under-limit" min="-405,14,495" max="-626,0,573"/>
+	<union name="woolrooms">
+    	<rectangle name="yellow-room" min="-586,531" max="-592,523"/>
+    	<rectangle name="purple-room" min="-431,531" max="-437,523"/>
+    </union>
+    <union name="bases">
+    	<rectangle name="yellow-base" min="-586,531" max="-592,523"/>
+    	<rectangle name="purple-base" min="-424,534" max="-410,520"/>
+    </union>
+    <union name="victorymonuments">
+    	<cuboid name="yellow-place" min="-584,25,527" max="-583,27,527"/>
+    	<cuboid name="purple-place" min="-439,25,527" max="-449,27,527"/>
+    </union>
+	<apply block="deny-void" message="You may not edit the void area!">
+		<region name="map"/>
+	</apply>
+	<apply enter="deny-yellow" message="You may not enter your team's wool room!">
+		<region name="yellow-room"/>
+	</apply>
+	<apply block="allow-blocks" use="deny-yellow">
+		<region name="yellow-room"/>
+	</apply>
+	<apply enter="deny-purple" message="You may not enter your team's wool room!">
+		<region name="purple-room"/>
+	</apply>
+	<apply block="allow-blocks" use="deny-purple">
+		<region name="purple-room"/>
+	</apply>
+	<apply block-place="deny-all" block-break="only-wool" message="Do not modify the Victory Monument!">
+		<union name="victorymonuments">
+	</apply>
+    <apply enter="only-yellow" block-place="deny-all" message="You may not enter yellow's base!">
+        <region name="yellow-base"/>
+    </apply>
+    <apply enter="only-purple" block-place="deny-all" message="You may not enter purple's base!">
+        <region name="purple-base"/>
+    </apply>
+    <apply block-place="deny-all" message="You may not place blocks at this height">
+		<region name="under-limit"/>
+	</apply>
+</regions>
+<renewables>
+    <renewable rate="15" grow="true" particles="true" sound="true" avoid-entities="true">
+        <region>
+            <region name="map"/>
+        </region>
+        <!-- These are the blocks that will renew -->
+        <renew damage="10">stained clay</renew>
+        <renew damage="4">stained clay</renew>
+        <renew>endstone</renew>
+        <renew damage="5">wood</renew>
+        <!-- The blocks replaced will be randomized, in other words, not the same as they originally were, once renewed -->
+        <shuffle damage="10">stained clay</renew>
+        <shuffle damage="4">stained clay</renew>
+        <shuffle>endstone</renew>
+        <shuffle damage="5">wood</renew>
+    </renewable>
+    <renewable rate="10" grow="true" particles="true" sound="true" avoid-entities="true">
+        <region>
+        	<region name="map"/>
+        </region>
+        <!-- Glass, of both colors will be renewed after 10 seconds -->
+        <renew damage="4">stained glass</renew>
+        <renew damage="10">stained glass</renew>
+        <renew>stone</renew>
+        <renew>glowstone</renew>
+    </renewable>
+    <renewable rate="5" grow="true" particles="true" sound="true" avoid-entities="true">
+        <region>
+        	<union name="woolrooms"/>
+        </region>
+        <renew damage="4">stained glass</renew>
+        <renew damage="10">stained glass</renew>
+        <renew damage="10">stained clay</renew>
+        <renew damage="4">stained clay</renew>
+        <renew>stone</renew>
+        <renew>glowstone</renew>
+    </renewable>
+</renewables>
+<wools team="yellow">
+    	<wool color="purple">
+        	<monument><block>-583,26,527</block></monument>
+    	</wool>
+</wools>
+<wools team="purple">
+    	<wool color="yellow">
+        	<monument><block>-440,26,527</block></monument>
+    	</wool>
+</wools>
+</map>
