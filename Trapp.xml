@@ -25,7 +25,7 @@
 </spawns>
 <kits>
 	<!--  Applied when the player is on their side of the map  -->
-	<kit name="defender" force="true">
+	<kit name="yellow-defender" force="true" parents="yellow">
 		<clear/>
 		<item slot="0">stone sword</item>
 		<item slot="1">bow</item>
@@ -37,7 +37,7 @@
 		<potion duration="5" amplifier="3">heal</potion>
 	</kit>
 	<!--  Applied when the player is on the enemies side of the map  -->
-	<kit name="attacker" force="true">
+	<kit name="yellow-attacker" force="true" parents="yellow">
 		<clear/>
 		<item slot="0">stone sword</item>
 		<item slot="1">bow</item>
@@ -49,7 +49,7 @@
 		<boots attributes="generic.movementSpeed:add:1;generic.maxHealth:add:+3" locked="true">iron boots</boots>
 	</kit>
 	<!--  Applied when the player goes into the Wool Room region  -->
-	<kit name="retriever" force="true">
+	<kit name="yellow-retriever" force="true" parents="yellow">
 		<clear/>
 		<item slot="0">iron sword</item>
 		<item slot="1">bow</item>
@@ -64,15 +64,55 @@
 		<potion duration="1" amplifier="5">heal</potion>
 		<potion duration="1" amplifier="oo">fast digging</potion>
 	</kit>
-	<!--  Armor and stained clay is distrubuted according to what team the player is on (see bellow)  -->
-	<kit name="yellow" parents="defender,retriever,attacker">
+	<!--  Applied when the player is on their side of the map  -->
+	<kit name="purple-defender" force="true" parents="purple">
+		<clear/>
+		<item slot="0">stone sword</item>
+		<item slot="1">bow</item>
+		<item slot="2">wood pickaxe</item>
+		<item slot="3">wood axe</item>
+		<item slot="5" amount="24" damage="5">wood</item>
+		<item slot="8" amount="3">golden apple</item>
+		<item slot="28" amount="32">arrow</item>
+		<potion duration="5" amplifier="3">heal</potion>
+	</kit>
+	<!--  Applied when the player is on the enemies side of the map  -->
+	<kit name="purple-attacker" force="true" parents="purple">
+		<clear/>
+		<item slot="0">stone sword</item>
+		<item slot="1">bow</item>
+		<item slot="2">wood pickaxe</item>
+		<item slot="3">wood axe</item>
+		<item slot="5" amount="32" damage="5">wood</item>
+		<item slot="8" amount="6">golden apple</item>
+		<item slot="28" amount="32">arrow</item>
+		<boots attributes="generic.movementSpeed:add:1;generic.maxHealth:add:+3" locked="true">iron boots</boots>
+	</kit>
+	<!--  Applied when the player goes into the Wool Room region  -->
+	<kit name="purple-retriever" force="true" parents="purple">
+		<clear/>
+		<item slot="0">iron sword</item>
+		<item slot="1">bow</item>
+		<item slot="2">wood pickaxe</item>
+		<item slot="3">wood axe</item>
+		<item slot="5" amount="64" damage="5">wood</item>
+		<item slot="8" amount="32">golden apple</item>
+		<item slot="28" amount="32">arrow</item>
+		<leggins>iron leggings</leggins>
+		<boots attributes="generic.movementSpeed:add:1;generic.maxHealth:add:+2" locked="true">diamond boots</boots>
+		<chestplate locked="true">chainmail chestplate<chestplate>
+		<potion duration="1" amplifier="5">heal</potion>
+		<potion duration="1" amplifier="oo">fast digging</potion>
+	</kit>
+	<!--  Armor and stained clay is distrubuted according to what team the player is on (see below)  -->
+	<kit name="yellow">
 		<helmet color="E5E533" damage="-3000" locked="true">leather helmet</helmet>
 		<chestplate color="E5E533" damage="-3000" locked="true">leather chestplate</chestplate>
 		<leggings color="E5E533" damage="-3000" locked="true">leather leggings</leggings>
 		<boots color="E5E533" damage="-3000" locked="true">leather boots</boots>
 		<item slot="4" amount="16" damage="4">stained clay</item>
 	</kit>
-	<kit name="purple" parents="defender,retriever,attacker">
+	<kit name="purple">
 		<helmet color="7F3FB2" damage="-3000" locked="true">leather helmet</helmet>
 		<chestplate color="7F3FB2" damage="-3000" locked="true">leather chestplate</chestplate>
 		<leggings color="7F3FB2" damage="-3000" locked="true">leather leggings</leggings>
@@ -150,12 +190,12 @@
 	<cuboid name="retrieve-yellow" min="-590,20,530" max="-588,24,524"/>
 	<cuboid name="retrieve-purple" min="-435,24,530" max="-433,20,524"/>
 	<!--  Applied  -->
-	<apply kit="defender" filter="only-purple" region="defend-purple"/>
-	<apply kit="defender" filter="only-yellow" region="defend-yellow"/>
-	<apply kit="attacker" filter="only-purple" region="attack-purple"/>
-	<apply kit="attacker" filter="only-yellow" region="attack-yellow"/>
-	<apply kit="retriever" region="retrieve-purple"/>
-	<apply kit="retriever" region="retrieve-yellow"/>
+	<apply kit="purple-defender" filter="only-purple" region="defend-purple"/>
+	<apply kit="yellow-defender" filter="only-yellow" region="defend-yellow"/>
+	<apply kit="purple-attacker" filter="only-purple" region="attack-purple"/>
+	<apply kit="yellow-attacker" filter="only-yellow" region="attack-yellow"/>
+	<apply kit="purple-retriever" region="retrieve-purple"/>
+	<apply kit="yellow-retriever" region="retrieve-yellow"/>
 	<!--  Other regions  -->
 	<cuboid name="under-limit" min="-405,14,495" max="-626,0,573"/>
 	<union name="woolrooms">
@@ -237,13 +277,13 @@
     </renewable>
 </renewables>
 <wools team="yellow">
-    	<wool color="purple">
-        	<monument><block>-583,26,527</block></monument>
-    	</wool>
+	<wool color="purple">
+    	<monument><block>-583,26,527</block></monument>
+	</wool>
 </wools>
 <wools team="purple">
-    	<wool color="yellow">
-        	<monument><block>-440,26,527</block></monument>
-    	</wool>
+	<wool color="yellow">
+    	<monument><block>-440,26,527</block></monument>
+	</wool>
 </wools>
 </map>
